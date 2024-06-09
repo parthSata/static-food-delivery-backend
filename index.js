@@ -7,12 +7,25 @@ const currentDirectory = path.resolve();
 const sourcePath = path.join(currentDirectory, "db.json");
 const writablePath = path.join("/tmp", "db.json");
 
-// Function to copy file and start server
+// Function to read from source and write to destination
+async function copyData() {
+  try {
+    // Read data from source file
+    const data = await fs.readFile(sourcePath, 'utf-8');
+    // Write data to destination file
+    await fs.writeFile(writablePath, data, 'utf-8');
+    console.log("Data from db.json copied to /tmp/db.json.");
+  } catch (error) {
+    console.error("Error reading or writing file:", error);
+    throw error;
+  }
+}
+
+// Function to start the JSON server
 async function startServer() {
   try {
-    // Copy db.json file to /tmp directory
-    await fs.copyFile(sourcePath, writablePath);
-    console.log("db.json file copied to /tmp directory.");
+    // Ensure data is copied before starting the server
+    await copyData();
 
     // Create the JSON server
     const server = create();
@@ -31,7 +44,7 @@ async function startServer() {
       console.log(`JSON Server is running on port ${port}`);
     });
   } catch (error) {
-    console.error("Error copying db.json file or starting server:", error);
+    console.error("Error starting server:", error);
   }
 }
 
