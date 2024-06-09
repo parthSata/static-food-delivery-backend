@@ -12,6 +12,7 @@ async function copyData() {
   try {
     // Read data from source file
     const data = await fs.readFile(sourcePath, 'utf-8');
+    console.log("data", data)
     // Write data to destination file
     await fs.writeFile(writablePath, data, 'utf-8');
     console.log("Data from db.json copied to /tmp/db.json.");
