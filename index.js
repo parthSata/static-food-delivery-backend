@@ -1,13 +1,13 @@
 import { create, router as _router, defaults } from "json-server";
 import path from "path";
 import fs from "fs";
-import "./db.json";
 
-// Source and destination paths
-const sourcePath = path.join("", "db.json");
+// Define paths
+const currentDirectory = path.resolve();
+const sourcePath = path.join(currentDirectory, "db.json");
 const writablePath = path.join("/tmp", "db.json");
 
-// Copy db.json from the root directory to the /tmp directory
+// Copy db.json file to /tmp directory
 fs.copyFileSync(sourcePath, writablePath);
 
 // Create the JSON server
