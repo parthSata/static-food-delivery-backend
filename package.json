@@ -1,0 +1,19 @@
+{
+  "name": "static-food-delivery-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "json-server --watch db.json --port 5000"
+  },
+  "dependencies": {
+    "json-server": "^0.16.3"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "json-server": "^1.0.0-beta.0"
+  },
+  "author": "",
+  "license": "ISC"
+}
