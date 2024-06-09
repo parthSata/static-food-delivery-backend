@@ -3,7 +3,7 @@ import path from "path";
 import fs from "fs";
 
 // Source and destination paths
-const sourcePath = path.join("/", "db.json");
+const sourcePath = path.join("./", "db.json");
 const writablePath = path.join("/tmp", "db.json");
 
 // Copy db.json from the root directory to the /tmp directory
