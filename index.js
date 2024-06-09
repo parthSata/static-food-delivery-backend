@@ -1,4 +1,6 @@
 import { create, router as _router, defaults } from "json-server";
+import path from "path"; 
+
 const server = create();
 const writablePath = path.join("/tmp", "db.json"); // Change to a writable directory
 const router = _router(writablePath);
