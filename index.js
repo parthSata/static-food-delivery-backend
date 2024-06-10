@@ -1,7 +1,6 @@
 import { create, router as _router, defaults } from "json-server";
 import path from "path";
 import fs from "fs";
-import "./db.json";
 
 // Source and destination paths
 const sourcePath = path.join("", "db.json");
