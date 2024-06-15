@@ -1,26 +1,30 @@
-const jsonServer = require('json-server');
+// See https://github.com/typicode/json-server#module
+const jsonServer = require("json-server");
+
 const server = jsonServer.create();
-const router = jsonServer.router('db.json');
+
+// Uncomment to allow write operations
+const fs = require("fs");
+const path = require("path");
+const filePath = path.join("db.json");
+const data = fs.readFileSync(filePath, "utf-8");
+const db = JSON.parse(data);
+const router = jsonServer.router(db);
+
+// Comment out to allow write operations
+// const router = jsonServer.router('db.json')
+
 const middlewares = jsonServer.defaults();
-const fs = require('fs');
-const path = require('path');
 
 server.use(middlewares);
-
-server.use((req, res, next) => {
-  if (req.method === 'POST' || req.method === 'PUT' || req.method === 'DELETE') {
-    const filePath = path.join(__dirname, 'db.json');
-    const data = fs.readFileSync(filePath, 'utf-8');
-    req.body = JSON.parse(data);
-  }
-  next();
-});
-
+// Add this before server.use(router)
 server.use(router);
 
 const port = process.env.PORT || 3000;
+
 server.listen(port, () => {
-  console.log(`JSON Server is running on port ${port}`);
+  console.log("JSON Server is running");
 });
 
+// Export the Server API
 module.exports = server;
